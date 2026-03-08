@@ -1,0 +1,95 @@
+# Jupiter Assignment — Financial Document Insights Engine
+
+A pipeline that answers natural language queries over financial PDFs.
+
+---
+
+## Usage
+
+```bash
+# Direct mode (default)
+python financial_assistant.py docs/statement.pdf "What is my total spend?"
+
+# RAG mode
+python financial_assistant.py docs/statement.pdf "Show all EMI transactions" --rag
+```
+
+---
+
+## Modes
+
+### Direct (default)
+Best for short documents (1–5 pages). The full markdown is passed straight to the insights pipeline.
+
+```
+PDF → Docling OCR → Markdown → Insights Pipeline → Answer
+```
+
+### RAG (`--rag`)
+Best for large multi-page documents. Indexes the document into Pinecone, retrieves only the chunks relevant to the query, then runs insights on those chunks.
+
+```
+PDF → Docling OCR → Markdown → Chunker → Embed → Pinecone
+                                                      ↓
+                                              Retrieve top-K chunks
+                                              Save to merged_markdown/
+                                                      ↓
+                                           Insights Pipeline → Answer
+```
+
+> Both modes skip OCR and chunking if outputs already exist on disk.
+
+---
+
+## Insights Pipeline
+
+Shared by both modes. Takes a markdown string + query and returns a natural language answer.
+
+```
+Query + Markdown
+      ↓
+Schema Planner   — decides what fields and transactions to extract
+      ↓
+Extractor        — extracts a statement summary dict + list of transactions
+      ↓
+Router           — decides if numeric computation is needed
+      ↓
+Code Generator   — writes Python code to compute the result  (skipped if not needed)
+      ↓
+Executor         — runs the code in a sandbox, retries up to 2x on failure
+      ↓
+Narrator         — formats everything into a clear natural language answer
+```
+
+> The LLM never does math directly — it only extracts, plans, generates code, and narrates. All computation goes through the sandboxed executor.
+
+---
+
+## Project Structure
+
+```
+modal-financial-assistant-rag-pipeline.py   # entry point — orchestrates both modes
+chunker_v2.py                               # splits markdown into overlapping chunks at ## headings
+schema_planner.py        # plans extraction schema from query + document
+extractor.py             # extracts statement summary + transactions
+router.py                # decides if computation is needed
+code_generator.py        # generates Python code for numeric computation
+code_executor.py         # sandboxed exec with retry loop
+narrator.py              # produces final natural language answer
+embed_v2.py                 # embeds chunks and upserts to Pinecone
+retriever.py             # retrieves top-K relevant chunks from Pinecone
+
+docling_md/              # full markdown per PDF (OCR output)
+doc_chunks/              # chunks per PDF
+merged_markdown/         # retrieved + merged chunks used for each query
+```
+
+---
+
+## Deployment
+
+### Backend — Modal
+Docling OCR runs on a Modal serverless GPU endpoint. The `modal-financial-assistant-rag-pipeline.py ` script is deployed as a Modal function, so OCR happens on cloud GPUs without any local setup. The main pipeline calls this endpoint and receives the markdown output.
+
+### Frontend — Streamlit
+The user interface is a Streamlit app. Users upload a PDF, type a query, choose a mode (Direct or RAG), and see the final answer along with intermediate outputs (extracted transactions, generated code, narrator response).
