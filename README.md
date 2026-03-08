@@ -68,15 +68,15 @@ Narrator         — formats everything into a clear natural language answer
 ## Project Structure
 
 ```
-financial_assistant.py   # entry point — orchestrates both modes
-chunker.py               # splits markdown into overlapping chunks at ## headings
+modal-financial-assistant-rag-pipeline.py   # entry point — orchestrates both modes
+chunker_v2.py                               # splits markdown into overlapping chunks at ## headings
 schema_planner.py        # plans extraction schema from query + document
 extractor.py             # extracts statement summary + transactions
 router.py                # decides if computation is needed
 code_generator.py        # generates Python code for numeric computation
-executor.py              # sandboxed exec with retry loop
+code_executor.py         # sandboxed exec with retry loop
 narrator.py              # produces final natural language answer
-stage1_5_embed.py        # embeds chunks and upserts to Pinecone
+embed_v2.py                 # embeds chunks and upserts to Pinecone
 retriever.py             # retrieves top-K relevant chunks from Pinecone
 
 docling_md/              # full markdown per PDF (OCR output)
