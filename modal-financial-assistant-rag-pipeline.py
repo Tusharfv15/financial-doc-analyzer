@@ -1,401 +1,417 @@
 """
-Streamlit app for the Financial Document Insights Engine (v2)
-Supports RAG and Direct mode via toggle.
+Modal script — Financial Document Insights Engine (RAG + Direct)
+-----------------------------------------------------------------
+Two modes:
+  - RAG    : File -> Markdown -> Chunk -> Embed -> Retrieve -> Insights
+  - Direct : File -> Markdown -> Insights (full document, no chunking)
+
+Usage:
+    # RAG mode
+    modal run rag-based-financial-assistant-modal.py --input-path ./statement.pdf --query "What is my total spend?" --mode rag
+
+    # Direct mode
+    modal run rag-based-financial-assistant-modal.py --input-path ./statement.pdf --query "What is my total spend?" --mode direct
 """
 
 import os
-import base64
-import requests
-import streamlit as st
-from dotenv import load_dotenv
+import json
+import time
+import modal
+from pathlib import Path
+from pydantic import BaseModel, Field
+from openai import OpenAI
 
-load_dotenv()
+MODEL   = "gpt-5-mini-2025-08-07"
+DIVIDER = "─" * 60
 
-ENDPOINT = os.getenv("INFERENCE_ENDPOINT_V2", "")
+os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
 
-# ── Page config ───────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Image & App setup
+# ---------------------------------------------------------------------------
 
-st.set_page_config(
-    page_title="Jupiter · Financial Insights",
-    page_icon="◈",
-    layout="wide",
+app = modal.App("financial-insights-engine-rag")
+
+image = (
+    modal.Image.debian_slim(python_version="3.11")
+    .apt_install([
+        "libgl1",
+        "libglib2.0-0",
+        "poppler-utils",
+    ])
+    .pip_install([
+        "openai",
+        "docling",
+        "pydantic",
+        "fastapi",
+        "rapidocr-onnxruntime",
+        "opencv-python-headless",
+        "pinecone",
+    ])
+    .add_local_python_source("schema_planner")
+    .add_local_python_source("extractor")
+    .add_local_python_source("router")
+    .add_local_python_source("code_generator")
+    .add_local_python_source("code_executor")
+    .add_local_python_source("retriever")
+    .add_local_python_source("embed_v2")
+    .add_local_python_source("chunker_v2")
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# Volumes
+# ---------------------------------------------------------------------------
 
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+data_volume = modal.Volume.from_name("financial-insights-data", create_if_missing=True)
 
-html, body, [class*="css"] {
-    font-family: 'DM Mono', monospace;
-    background-color: #0e0e0f;
-    color: #e8e3db;
-    font-size: 18px;
-}
-.stApp { background-color: #0e0e0f; }
-#MainMenu, footer, header { visibility: hidden; }
-.block-container { padding-top: 3rem; padding-bottom: 3rem; max-width: 1100px; padding-left: 3rem; padding-right: 3rem; }
+# ---------------------------------------------------------------------------
+# Pydantic models
+# ---------------------------------------------------------------------------
 
-.jupiter-header { text-align: center; margin-bottom: 3rem; }
-.jupiter-header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 3.8rem; font-weight: 400;
-    color: #e8e3db; letter-spacing: -0.02em; margin: 0; line-height: 1;
-}
-.jupiter-header h1 span { font-style: italic; color: #c9a96e; }
-.jupiter-header p {
-    font-size: 0.95rem; color: #5a5a5a;
-    letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.6rem;
-}
+class InferenceRequest(BaseModel):
+    file_b64 : str = Field(description="Base64-encoded file contents (PDF, CSV, or XLSX)")
+    filename : str = Field(description="Original filename including extension e.g. 'statement.pdf'")
+    query    : str = Field(description="Natural language query about the document")
+    mode     : str = Field(default="direct", description="'rag' or 'direct'")
 
-.thin-divider { border: none; border-top: 1px solid #1e1e1f; margin: 2rem 0; }
 
-[data-testid="stFileUploader"] {
-    background: #131314; border: 1px solid #2a2a2b;
-    border-radius: 2px; padding: 1rem;
-}
-[data-testid="stFileUploader"]:hover { border-color: #c9a96e; }
-[data-testid="stFileUploader"] label {
-    color: #5a5a5a !important; font-size: 0.78rem !important;
-    letter-spacing: 0.1em; text-transform: uppercase;
-}
+class NarratorResponse(BaseModel):
+    answer  : str = Field(description="Clear, concise natural language answer to the user's query")
+    summary : str = Field(description="One-line summary of the key insight e.g. 'Total spend: INR 45,000'")
 
-[data-testid="stTextInput"] input,
-[data-testid="stTextArea"] textarea {
-    background: #131314 !important; border: 1px solid #2a2a2b !important;
-    border-radius: 2px !important; color: #e8e3db !important;
-    font-family: 'DM Mono', monospace !important;
-    font-size: 1rem !important; padding: 1rem !important;
-    resize: none !important;
-}
-[data-testid="stTextInput"] input:focus,
-[data-testid="stTextArea"] textarea:focus { border-color: #c9a96e !important; box-shadow: none !important; }
-[data-testid="stTextInput"] label,
-[data-testid="stTextArea"] label {
-    color: #5a5a5a !important; font-size: 0.9rem !important;
-    letter-spacing: 0.1em; text-transform: uppercase;
-}
 
-.stButton > button {
-    background: #c9a96e !important; color: #0e0e0f !important;
-    border: none !important; border-radius: 2px !important;
-    font-family: 'DM Mono', monospace !important;
-    font-size: 0.9rem !important; font-weight: 500 !important;
-    letter-spacing: 0.15em !important; text-transform: uppercase !important;
-    padding: 0.65rem 2rem !important; width: 100% !important;
-}
-.stButton > button:hover { opacity: 0.85 !important; }
+# ---------------------------------------------------------------------------
+# Modal class
+# ---------------------------------------------------------------------------
 
-[data-testid="stProgress"] > div > div { background: #c9a96e !important; }
+@app.cls(
+    image=image,
+    gpu="A10G",
+    timeout=60 * 20,
+    scaledown_window=120,
+    volumes={"/data": data_volume},
+    secrets=[
+        modal.Secret.from_name("openai-secret"),
+        modal.Secret.from_name("pinecone-secret"),  # must have PINECONE_API_KEY + PINECONE_INDEX_NAME
+    ],
+)
+class FinancialInsightsEngine:
 
-/* ── Mode toggle ── */
-.mode-toggle-wrap {
-    display: flex; align-items: center; gap: 1rem;
-    background: #131314; border: 1px solid #2a2a2b;
-    border-radius: 2px; padding: 0.85rem 1.2rem;
-    margin-bottom: 1.25rem;
-}
-.mode-label {
-    font-size: 0.78rem; letter-spacing: 0.15em;
-    text-transform: uppercase; color: #5a5a5a; white-space: nowrap;
-}
-.mode-badge {
-    display: inline-block; padding: 0.25rem 0.85rem;
-    border-radius: 2px; font-size: 0.82rem;
-    letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
-}
-.mode-badge-rag    { background: #1a2a1a; color: #6abf6a; border: 1px solid #2a4a2a; }
-.mode-badge-direct { background: #1a1a2a; color: #6a9abf; border: 1px solid #2a2a4a; }
-.mode-hint {
-    font-size: 0.82rem; color: #3a3a3b;
-    letter-spacing: 0.05em; margin-left: auto;
-}
+    @modal.enter()
+    def setup(self):
+        from docling.document_converter import DocumentConverter
 
-/* toggle switch override */
-[data-testid="stToggle"] { margin: 0 !important; }
-[data-testid="stToggle"] label { display: none !important; }
+        os.environ["DOCLING_CACHE_DIR"] = "/data/docling-cache"
+        os.makedirs("/data/docling-cache", exist_ok=True)
+        os.makedirs("/data/results", exist_ok=True)
+        os.makedirs("/data/chunks", exist_ok=True)
+        os.makedirs("/data/merged", exist_ok=True)
 
-.result-card {
-    background: #131314; border: 1px solid #2a2a2b;
-    border-left: 3px solid #c9a96e; border-radius: 2px;
-    padding: 1.5rem 1.8rem; margin-bottom: 1rem;
-}
-.result-label {
-    font-size: 0.9rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: #5a5a5a; margin-bottom: 0.5rem;
-}
-.result-summary {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2rem; color: #c9a96e; line-height: 1.3;
-}
-.result-answer { font-size: 1.05rem; color: #b0ab9e; line-height: 1.9; white-space: pre-wrap; }
+        print("Initializing OpenAI client...")
+        self.client = OpenAI()
+        print("Initializing Docling converter...")
+        self.converter = DocumentConverter()
+        print("Ready.")
 
-.mode-result-pill {
-    display: inline-block; padding: 0.3rem 1rem;
-    border-radius: 2px; font-size: 0.82rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    margin-bottom: 1.25rem;
-}
-.mode-result-rag    { background: #1a2a1a; color: #6abf6a; border: 1px solid #2a4a2a; }
-.mode-result-direct { background: #1a1a2a; color: #6a9abf; border: 1px solid #2a2a4a; }
+    # ── Helpers ──────────────────────────────────────────────────────────────
 
-.meta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
-.meta-pill {
-    background: #1a1a1b; border: 1px solid #2a2a2b; border-radius: 2px;
-    padding: 0.4rem 1rem; font-size: 0.88rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: #5a5a5a;
-}
-.meta-pill span { color: #e8e3db; }
+    def convert_to_md(self, input_path: str) -> str:
+        start      = time.time()
+        input_path = Path(input_path) # type: ignore
 
-.error-box {
-    background: #1a0f0f; border: 1px solid #3d1f1f;
-    border-left: 3px solid #c0392b; border-radius: 2px;
-    padding: 1rem 1.4rem; font-size: 1rem; color: #e07070;
-}
+        if not input_path.exists(): # type: ignore
+            raise FileNotFoundError(f"File does not exist: {input_path}")
 
-/* expander overrides */
-[data-testid="stExpander"] {
-    background: #131314 !important;
-    border: 1px solid #2a2a2b !important;
-    border-radius: 2px !important;
-    margin-bottom: 0.5rem !important;
-}
-[data-testid="stExpander"] summary {
-    font-size: 1rem !important;
-    letter-spacing: 0.08em !important;
-    color: #7a7a7a !important;
-    padding: 0.85rem 1rem !important;
-}
-[data-testid="stExpander"] summary:hover { color: #c9a96e !important; }
+        ext = input_path.suffix.lower() # type: ignore
+        if ext not in {".pdf", ".csv", ".xlsx"}:
+            raise ValueError(f"Unsupported file type: {ext}.")
 
-.code-block {
-    background: #0a0a0b; border: 1px solid #1e1e1f;
-    border-radius: 2px; padding: 1rem 1.2rem;
-    font-size: 0.95rem; color: #7abfb0;
-    white-space: pre-wrap; line-height: 1.7;
-    overflow-x: auto;
-}
-.field-row {
-    display: flex; gap: 1rem; padding: 0.5rem 0;
-    border-bottom: 1px solid #1a1a1b; font-size: 0.95rem;
-}
-.field-name { color: #c9a96e; min-width: 140px; }
-.field-type { color: #5a5a5a; min-width: 60px; }
-.field-desc { color: #7a7a7a; }
-.kv-row { display: flex; gap: 1rem; padding: 0.5rem 0; font-size: 0.95rem; }
-.kv-key { color: #7a7a7a; min-width: 180px; }
-.kv-val { color: #e8e3db; }
-.tag {
-    display: inline-block; padding: 0.2rem 0.6rem;
-    border-radius: 2px; font-size: 0.88rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-}
-.tag-yes  { background: #0f2a0f; color: #6abf6a; border: 1px solid #1f4a1f; }
-.tag-no   { background: #1a1a0f; color: #bfbf6a; border: 1px solid #3a3a1f; }
-.tag-ok   { background: #0f2a0f; color: #6abf6a; border: 1px solid #1f4a1f; }
-.tag-fail { background: #2a0f0f; color: #bf6a6a; border: 1px solid #4a1f1f; }
-.tag-skip { background: #1a1a1b; color: #5a5a5a; border: 1px solid #2a2a2b; }
+        output_dir = Path("/data/results")
+        output_dir.mkdir(exist_ok=True)
+        output_md  = output_dir / f"{input_path.stem}.md" # type: ignore
 
-/* ── RAG chunks expander ── */
-.chunk-row {
-    display: flex; gap: 1rem; padding: 0.6rem 0;
-    border-bottom: 1px solid #1a1a1b; font-size: 0.92rem; align-items: baseline;
-}
-.chunk-id    { color: #c9a96e; min-width: 80px; }
-.chunk-score { color: #5a5a5a; min-width: 70px; }
-.chunk-summary { color: #7a7a7a; }
-</style>
-""", unsafe_allow_html=True)
+        # Skip conversion if markdown already exists
+        if output_md.exists():
+            print(f"  [SKIP] Markdown already exists: {output_md}")
+            return str(output_md)
 
-# ── Header ────────────────────────────────────────────────────────────────────
+        print(f"  Input file : {input_path} ({ext})")
+        print("  Starting conversion...")
+        result   = self.converter.convert(input_path)
+        markdown = result.document.export_to_markdown()
 
-st.markdown("""
-<div class="jupiter-header">
-    <h1>◈ <span>Jupiter</span></h1>
-    <p>Financial Document Insights Engine</p>
-</div>
-""", unsafe_allow_html=True)
+        with open(output_md, "w", encoding="utf-8") as f:
+            f.write(markdown)
 
-# ── Session state ─────────────────────────────────────────────────────────────
+        print(f"  Saved: {output_md} ({round(time.time() - start, 2)}s)")
+        return str(output_md)
 
-if "result" not in st.session_state:
-    st.session_state.result = None
-if "error" not in st.session_state:
-    st.session_state.error = None
+    def narrator_node(
+        self,
+        query        : str,
+        statement    : dict,
+        transactions : list[dict],
+        result       : str | None = None,
+    ) -> NarratorResponse:
+        data_context = (
+            f"Computed result:\n{result}"
+            if result else
+            f"Extracted records ({len(transactions)}):\n{json.dumps(transactions, indent=2)}"
+        )
 
-# ── Mode toggle ───────────────────────────────────────────────────────────────
+        response = self.client.responses.parse(
+            model  = MODEL,
+            input  = [
+                {
+                    "role"    : "system",
+                    "content" : (
+                        "You are a helpful financial document assistant. "
+                        "Your job is to narrate the answer clearly and naturally.\n\n"
+                        "Rules:\n"
+                        "- Be concise and direct — answer the query first, then provide context.\n"
+                        "- Always mention the currency if present in the data.\n"
+                        "- If the result is a list of transactions, present them in a readable format.\n"
+                        "- If the result is a number, round to 2 decimal places.\n"
+                        "- Highlight any notable observations.\n"
+                        "- Do not mention technical details like 'extracted data' or 'computed result'.\n"
+                        "- Keep the tone professional but friendly."
+                    )
+                },
+                {
+                    "role"    : "user",
+                    "content" : (
+                        f"Query: {query}\n\n"
+                        f"Statement summary:\n{json.dumps(statement, indent=2)}\n\n"
+                        f"{data_context}"
+                    )
+                }
+            ],
+            text_format = NarratorResponse,
+        )
+        return response.output_parsed  # type: ignore
 
-col_label, col_toggle, col_badge, col_hint = st.columns([2, 0.6, 1.2, 3])
+    def _run_insights_pipeline(self, query: str, markdown: str) -> dict:
+        from schema_planner import schema_planner_node
+        from extractor import extractor_node
+        from router import router_node
+        from code_generator import code_generator_node
+        from code_executor import executor_node, MAX_RETRIES
 
-with col_label:
-    st.markdown("<div style='padding-top:0.45rem;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;color:#5a5a5a'>Mode</div>", unsafe_allow_html=True)
+        # Step 1 – Schema Planner
+        print(f"[1/6] Schema Planner")
+        print(f"      {DIVIDER}")
+        schema = schema_planner_node(query, markdown)
+        print(f"  Fields planned : {len(schema.fields)}")
+        for f in schema.fields:
+            print(f"    • {f.name} ({f.type}) — {f.description}")
+        print(f"  Filter hint    : {schema.filter_hint}")
+        print(f"  Compute hint   : {schema.computation_hint}")
+        print(f"  Doc context    : {schema.document_context}")
+        print()
 
-with col_toggle:
-    use_rag = st.toggle("RAG", value=False, label_visibility="collapsed")
+        # Step 2 – Extractor
+        print(f"[2/6] Extractor")
+        print(f"      {DIVIDER}")
+        statement, transactions = extractor_node(query, schema, markdown)
+        print(f"  Transactions extracted : {len(transactions)}")
+        for k, v in statement.items():
+            print(f"    • {k} : {v}")
+        for i, tx in enumerate(transactions, 1):
+            print(f"    [{i:02d}] {json.dumps(tx)}")
+        print()
 
-mode = "rag" if use_rag else "direct"
+        # Step 3 – Router
+        print(f"[3/6] Router")
+        print(f"      {DIVIDER}")
+        decision = router_node(query, statement, transactions)
+        print(f"  Needs computation : {decision.needs_computation}")
+        print(f"  Reason            : {decision.reason}")
+        print()
 
-with col_badge:
-    if use_rag:
-        st.markdown('<div style="padding-top:0.35rem"><span class="mode-badge mode-badge-rag">RAG</span></div>', unsafe_allow_html=True)
-    else:
-        st.markdown('<div style="padding-top:0.35rem"><span class="mode-badge mode-badge-direct">Direct</span></div>', unsafe_allow_html=True)
+        exec_result = None
+        generated   = None
 
-with col_hint:
-    if use_rag:
-        st.markdown("<div style='padding-top:0.45rem;font-size:0.78rem;color:#3a3a3b;letter-spacing:0.05em'>chunk → embed → retrieve → analyse</div>", unsafe_allow_html=True)
-    else:
-        st.markdown("<div style='padding-top:0.45rem;font-size:0.78rem;color:#3a3a3b;letter-spacing:0.05em'>full document → analyse</div>", unsafe_allow_html=True)
+        if decision.needs_computation:
+            # Step 4 – Code Generator
+            print(f"[4/6] Code Generator")
+            print(f"      {DIVIDER}")
+            generated = code_generator_node(query, schema, statement, transactions)
+            print(f"  Reasoning : {generated.reasoning}")
+            for line in generated.code.splitlines():
+                print(f"    {line}")
+            print()
 
-st.markdown("<div style='height:0.25rem'></div>", unsafe_allow_html=True)
-
-# ── Upload & query ────────────────────────────────────────────────────────────
-
-uploaded_file = st.file_uploader("Statement", type=["pdf", "csv", "xlsx"])
-query = st.text_area("Query", placeholder='e.g. "What is my total spend this month?"', height=100)
-
-st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
-
-run_clicked = st.button("Analyse →", disabled=not uploaded_file or not query.strip())
-
-# ── Run ───────────────────────────────────────────────────────────────────────
-
-if run_clicked and uploaded_file and query.strip():
-    st.session_state.result = None
-    st.session_state.error  = None
-
-    st.markdown("<hr class='thin-divider'>", unsafe_allow_html=True)
-
-    file_bytes = uploaded_file.read()
-    file_b64   = base64.b64encode(file_bytes).decode("utf-8")
-    payload    = {
-        "file_b64" : file_b64,
-        "filename" : uploaded_file.name,
-        "query"    : query.strip(),
-        "mode"     : mode,
-    }
-
-    spinner_msg = "Chunking, embedding and retrieving..." if mode == "rag" else "Analysing document..."
-
-    result_holder = {}
-    with st.spinner(spinner_msg):
-        try:
-            resp = requests.post(ENDPOINT, json=payload, timeout=600)
-            if resp.status_code == 200:
-                result_holder["data"] = resp.json()
+            # Step 5 – Executor
+            print(f"[5/6] Executor")
+            print(f"      {DIVIDER}")
+            exec_result = executor_node(query, schema, statement, transactions, generated)
+            if exec_result.success:
+                print(f"  ✓ Execution successful")
+                print(f"  Raw result : {exec_result.result}")
             else:
-                result_holder["error"] = f"Endpoint returned {resp.status_code}: {resp.text[:300]}"
-        except Exception as e:
-            result_holder["error"] = str(e)
-
-    if "error" in result_holder:
-        st.session_state.error = result_holder["error"]
-    else:
-        st.session_state.result = result_holder["data"]
-
-# ── Render result ─────────────────────────────────────────────────────────────
-
-if st.session_state.result:
-    r            = st.session_state.result
-    result_mode  = r.get("mode", "direct")
-
-    st.markdown("<hr class='thin-divider'>", unsafe_allow_html=True)
-
-    # Mode badge on result
-    if result_mode == "rag":
-        st.markdown('<span class="mode-result-pill mode-result-rag">◈ RAG mode</span>', unsafe_allow_html=True)
-    else:
-        st.markdown('<span class="mode-result-pill mode-result-direct">◈ Direct mode</span>', unsafe_allow_html=True)
-
-    # ── Final answer ──────────────────────────────────────────────────────────
-    st.markdown(f"""
-    <div class="result-card">
-        <div class="result-label">Summary</div>
-        <div class="result-summary">{r.get('summary', '')}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="result-card">
-        <div class="result-label">Answer</div>
-        <div class="result-answer">{r.get('answer', '')}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
-    st.markdown("<p style='font-size:0.92rem;letter-spacing:0.2em;text-transform:uppercase;color:#5a5a5a;margin-bottom:0.75rem'>Pipeline Trace</p>", unsafe_allow_html=True)
-
-    # ── Step 1: Schema Planner ────────────────────────────────────────────────
-    schema = r.get("schema", {})
-    fields = schema.get("fields", [])
-    with st.expander(f"1 / 6 · Schema Planner — {len(fields)} fields planned"):
-        fields_html = "".join([
-            f'<div class="field-row"><span class="field-name">{f["name"]}</span><span class="field-type">{f["type"]}</span><span class="field-desc">{f["description"]}</span></div>'
-            for f in fields
-        ])
-        st.markdown(f'<div style="margin-bottom:1rem">{fields_html}</div>', unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class="kv-row"><span class="kv-key">Filter hint</span><span class="kv-val">{schema.get('filter_hint','—')}</span></div>
-        <div class="kv-row"><span class="kv-key">Computation hint</span><span class="kv-val">{schema.get('computation_hint','—')}</span></div>
-        <div class="kv-row"><span class="kv-key">Document context</span><span class="kv-val">{schema.get('document_context','—')}</span></div>
-        """, unsafe_allow_html=True)
-
-    # ── Step 2: Extractor ─────────────────────────────────────────────────────
-    statement    = r.get("statement", {})
-    transactions = r.get("transactions", [])
-    with st.expander(f"2 / 6 · Extractor — {len(transactions)} transactions"):
-        if statement:
-            st.markdown("<div class='result-label' style='margin-bottom:0.5rem'>Statement</div>", unsafe_allow_html=True)
-            kv_html = "".join([
-                f'<div class="kv-row"><span class="kv-key">{k}</span><span class="kv-val">{v}</span></div>'
-                for k, v in statement.items()
-            ])
-            st.markdown(f'<div style="margin-bottom:1rem">{kv_html}</div>', unsafe_allow_html=True)
-        if transactions:
-            st.markdown("<div class='result-label' style='margin-bottom:0.5rem'>Transactions</div>", unsafe_allow_html=True)
-            import pandas as pd
-            st.dataframe(
-                pd.DataFrame(transactions),
-                use_container_width=True,
-                hide_index=True,
-            )
-
-    # ── Step 3: Router ────────────────────────────────────────────────────────
-    router = r.get("router", {})
-    needs  = router.get("needs_computation", False)
-    tag    = '<span class="tag tag-yes">yes</span>' if needs else '<span class="tag tag-no">no</span>'
-    with st.expander(f"3 / 6 · Router — computation needed: {'yes' if needs else 'no'}"):
-        st.markdown(f"""
-        <div class="kv-row"><span class="kv-key">Needs computation</span><span class="kv-val">{tag}</span></div>
-        <div class="kv-row"><span class="kv-key">Reason</span><span class="kv-val">{router.get('reason','—')}</span></div>
-        """, unsafe_allow_html=True)
-
-    # ── Step 4: Code Generator ────────────────────────────────────────────────
-    cg   = r.get("code_generator", {})
-    code = cg.get("code")
-    with st.expander("4 / 6 · Code Generator" + (" — skipped" if not code else "")):
-        if code:
-            st.markdown(f'<div class="kv-row"><span class="kv-key">Reasoning</span><span class="kv-val">{cg.get("reasoning","—")}</span></div>', unsafe_allow_html=True)
-            st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
-            st.markdown(f'<div class="code-block">{code}</div>', unsafe_allow_html=True)
+                print(f"  ✗ Execution failed after {MAX_RETRIES} attempts")
+                print(f"  Error : {exec_result.error}")
+            print()
         else:
-            st.markdown('<span class="tag tag-skip">skipped — no computation needed</span>', unsafe_allow_html=True)
+            print(f"[4/6] Code Generator  — SKIPPED")
+            print(f"[5/6] Executor        — SKIPPED")
+            print()
 
-    # ── Step 5: Executor ──────────────────────────────────────────────────────
-    executor = r.get("executor", {})
-    success  = executor.get("success")
-    with st.expander("5 / 6 · Executor" + (" — skipped" if success is None else (" — ✓ success" if success else " — ✗ failed"))):
-        if success is None:
-            st.markdown('<span class="tag tag-skip">skipped — no computation needed</span>', unsafe_allow_html=True)
+        # Step 6 – Narrator
+        print(f"[6/6] Narrator")
+        print(f"      {DIVIDER}")
+        narrator = self.narrator_node(
+            query        = query,
+            statement    = statement,
+            transactions = transactions,
+            result       = exec_result.result if exec_result and exec_result.success else None,
+        )
+
+        return {
+            "summary" : narrator.summary,
+            "answer"  : narrator.answer,
+            "schema"  : {
+                "fields"           : [{"name": f.name, "type": f.type, "description": f.description} for f in schema.fields],
+                "filter_hint"      : schema.filter_hint,
+                "computation_hint" : schema.computation_hint,
+                "document_context" : schema.document_context,
+            },
+            "statement"    : statement,
+            "transactions" : transactions[:100],
+            "router"       : {"needs_computation": decision.needs_computation, "reason": decision.reason},
+            "code_generator" : {
+                "reasoning" : generated.reasoning if generated else None,
+                "code"      : generated.code      if generated else None,
+            },
+            "executor" : {
+                "success" : exec_result.success if exec_result else None,
+                "result"  : exec_result.result  if exec_result else None,
+                "error"   : exec_result.error   if exec_result else None,
+            },
+        }
+
+    def _run_pipeline(self, input_bytes: bytes, filename: str, query: str, mode: str) -> dict:
+        import tempfile
+        from pathlib import Path
+
+        ext = os.path.splitext(filename)[1].lower()
+        tmp_fd, input_path = tempfile.mkstemp(suffix=ext)
+        with os.fdopen(tmp_fd, "wb") as f:
+            f.write(input_bytes)
+
+        # Convert to markdown
+        if ext in {".pdf", ".csv", ".xlsx"}:
+            md_path  = self.convert_to_md(input_path)
+            markdown = open(md_path, encoding="utf-8").read()
+        elif ext == ".md":
+            markdown = open(input_path, encoding="utf-8").read()
+            md_path  = input_path
         else:
-            status_tag = '<span class="tag tag-ok">success</span>' if success else '<span class="tag tag-fail">failed</span>'
-            st.markdown(f'<div class="kv-row"><span class="kv-key">Status</span><span class="kv-val">{status_tag}</span></div>', unsafe_allow_html=True)
-            if executor.get("result"):
-                st.markdown(f'<div class="kv-row"><span class="kv-key">Result</span><span class="kv-val">{executor["result"]}</span></div>', unsafe_allow_html=True)
-            if executor.get("error"):
-                st.markdown(f'<div class="kv-row"><span class="kv-key">Error</span><span class="kv-val" style="color:#e07070">{executor["error"]}</span></div>', unsafe_allow_html=True)
+            raise ValueError(f"Unsupported file type: {ext}.")
 
-if st.session_state.error:
-    st.markdown("<hr class='thin-divider'>", unsafe_allow_html=True)
-    st.markdown(f'<div class="error-box">✗ &nbsp;{st.session_state.error}</div>', unsafe_allow_html=True)
+        os.unlink(input_path)
+
+        doc_name = os.path.splitext(filename)[0]
+
+        if mode == "rag":
+            from chunker_v2   import chunk_file
+            from embed_v2    import embed_document
+            from retriever import retrieve_chunks
+
+            # Chunk
+            chunks_dir = Path("/data/chunks") / doc_name
+            if chunks_dir.exists() and any(chunks_dir.glob("chunk_*.md")):
+                print(f"  [SKIP] Chunks already exist: {chunks_dir}")
+            else:
+                print(f"  Chunking document...")
+                chunk_file(md_path, output_dir=str(chunks_dir))
+
+            # Embed + index
+            print(f"  Embedding and indexing into Pinecone...")
+            embed_document(doc_name, chunks_dir=str(chunks_dir))
+
+            # Retrieve
+            print(f"  Retrieving relevant chunks for query...")
+            markdown, chunks_info = retrieve_chunks(query, doc_name)
+
+            if not markdown:
+                raise RuntimeError("No relevant chunks found for this query.")
+
+            print(f"  Retrieved {len(chunks_info)} chunk(s):")
+            for c in chunks_info:
+                print(f"    chunk_{c['chunk_id']} | score: {c['score']} | {c['summary']}")
+
+            # Save merged markdown
+            merged_path = Path("/data/merged") / f"{doc_name}-merged.md"
+            merged_path.write_text(markdown, encoding="utf-8")
+            print(f"  Merged markdown saved: {merged_path}")
+
+        result = self._run_insights_pipeline(query, markdown)
+        result["mode"] = mode
+        return result
+
+    @modal.method()
+    def run_pipeline(self, input_bytes: bytes, filename: str, query: str, mode: str = "direct") -> dict:
+        return self._run_pipeline(input_bytes, filename, query, mode)
+
+    @modal.fastapi_endpoint(method="POST")
+    def inference(self, request: InferenceRequest):
+        import base64
+        file_bytes = base64.b64decode(request.file_b64)
+        return self._run_pipeline(
+            input_bytes = file_bytes,
+            filename    = request.filename,
+            query       = request.query,
+            mode        = request.mode,
+        )
+
+
+# ---------------------------------------------------------------------------
+# Local entrypoint
+# ---------------------------------------------------------------------------
+
+@app.local_entrypoint()
+def main(
+    input_path : str = "",
+    query      : str = "",
+    mode       : str = "direct",
+):
+    if not input_path or not query:
+        raise ValueError(
+            'Provide --input-path, --query, and optionally --mode (rag|direct)\n'
+            'e.g.: modal run rag-based-financial-assistant-modal.py --input-path ./statement.pdf --query "What is my total spend?" --mode rag'
+        )
+
+    if mode not in {"rag", "direct"}:
+        raise ValueError(f"Invalid mode '{mode}'. Use 'rag' or 'direct'.")
+
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"File does not exist: {input_path}")
+
+    filename = os.path.basename(input_path)
+    with open(input_path, "rb") as f:
+        input_bytes = f.read()
+
+    print(f"\n{'=' * 60}")
+    print(f"  FINANCIAL DOCUMENT INSIGHTS ENGINE  [{mode.upper()} MODE]")
+    print(f"{'=' * 60}")
+    print(f"  File  : {filename}")
+    print(f"  Query : {query}")
+    print(f"  Mode  : {mode}")
+    print(f"{'=' * 60}\n")
+
+    engine = FinancialInsightsEngine()
+    result = engine.run_pipeline.remote(
+        input_bytes = input_bytes,
+        filename    = filename,
+        query       = query,
+        mode        = mode,
+    )
+
+    print(f"\n{'=' * 60}")
+    print(f"  FINAL ANSWER")
+    print(f"{'=' * 60}")
+    print(f"  Summary : {result['summary']}")
+    print(f"{'=' * 60}")
+    print(f"\n{result['answer']}")
+    print(f"\n{'=' * 60}\n")
