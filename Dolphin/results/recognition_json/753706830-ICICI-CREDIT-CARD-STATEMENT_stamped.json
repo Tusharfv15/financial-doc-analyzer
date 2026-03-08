@@ -1,0 +1,1043 @@
+{
+  "source_file": "E:\\jupiter-assignment\\layer-1-output\\753706830-ICICI-CREDIT-CARD-STATEMENT_stamped.pdf",
+  "total_pages": 5,
+  "pages": [
+    {
+      "page_number": 1,
+      "elements": [
+        {
+          "label": "header",
+          "bbox": [
+            3,
+            4,
+            77,
+            18
+          ],
+          "text": "[PAGE_START_1]",
+          "reading_order": 0
+        },
+        {
+          "label": "para",
+          "bbox": [
+            38,
+            47,
+            176,
+            63
+          ],
+          "text": "CREDIT CARD STATEMENT",
+          "reading_order": 1
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_002.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_002.png",
+          "bbox": [
+            413,
+            39,
+            539,
+            71
+          ],
+          "reading_order": 2
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_003.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_003.png",
+          "bbox": [
+            565,
+            36,
+            597,
+            74
+          ],
+          "reading_order": 3
+        },
+        {
+          "label": "para",
+          "bbox": [
+            38,
+            90,
+            135,
+            126
+          ],
+          "text": "15112020_1\n\n\nMR NAYANI SAGAR\nH.NO 4-31, HONNAJIPET\nDHARPALLY, NIZAMABAD",
+          "reading_order": 4
+        },
+        {
+          "label": "para",
+          "bbox": [
+            38,
+            196,
+            164,
+            262
+          ],
+          "text": "STATEMENT DATE\nJune 22, 2024\n.................................\nPAYMENT DUE DATE\nJuly 22, 2024",
+          "reading_order": 5
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_006.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_006.png",
+          "bbox": [
+            38,
+            275,
+            205,
+            397
+          ],
+          "reading_order": 6
+        },
+        {
+          "label": "para",
+          "bbox": [
+            28,
+            407,
+            79,
+            414
+          ],
+          "text": "SPINDS OVIREVIEW",
+          "reading_order": 7
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_008.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_008.png",
+          "bbox": [
+            38,
+            448,
+            171,
+            599
+          ],
+          "reading_order": 8
+        },
+        {
+          "label": "para",
+          "bbox": [
+            44,
+            632,
+            198,
+            671
+          ],
+          "text": "Get 2.5% cashback and\nsavings of 1% surcharge on\nfuel spends with ICICI Bank",
+          "reading_order": 9
+        },
+        {
+          "label": "para",
+          "bbox": [
+            71,
+            690,
+            132,
+            711
+          ],
+          "text": "OICICI Bank",
+          "reading_order": 10
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_011.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_011.png",
+          "bbox": [
+            134,
+            690,
+            169,
+            711
+          ],
+          "reading_order": 11
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_012.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_012.png",
+          "bbox": [
+            214,
+            82,
+            300,
+            199
+          ],
+          "reading_order": 12
+        },
+        {
+          "label": "para",
+          "bbox": [
+            305,
+            92,
+            472,
+            134
+          ],
+          "text": "Download the iMobile app to -\n\n• View statement instantly\n\n• Block/unblock ATM withdrawal, online transactions\n\n& international transactions in a single click",
+          "reading_order": 13
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_014.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_014.png",
+          "bbox": [
+            305,
+            139,
+            377,
+            165
+          ],
+          "reading_order": 14
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_016.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_016.png",
+          "bbox": [
+            386,
+            140,
+            467,
+            165
+          ],
+          "reading_order": 16
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_017.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_017.png",
+          "bbox": [
+            506,
+            93,
+            575,
+            147
+          ],
+          "reading_order": 17
+        },
+        {
+          "label": "para",
+          "bbox": [
+            306,
+            172,
+            571,
+            194
+          ],
+          "text": "SMS Mobile to 5676766 to get the download link or give a missed call on 9222299998 to get assistance on call.\n\n\nTMC apply",
+          "reading_order": 18
+        },
+        {
+          "label": "para",
+          "bbox": [
+            222,
+            199,
+            592,
+            211
+          ],
+          "text": "All communications are being sent to your registered e-mail ID and mobile number",
+          "reading_order": 19
+        },
+        {
+          "label": "list",
+          "bbox": [
+            224,
+            211,
+            594,
+            266
+          ],
+          "text": "• To update email ID and registered mailing address, visit www.icicibank.com > Login > Customer\nService > Service Requests > Credit Card > Request for address change or visit the nearest ICICI\nBank\nbranch\nusing\n\n• To update mobile number, visit the nearest ATM or\nScan to Pay\nAny Up",
+          "reading_order": 20
+        },
+        {
+          "label": "para",
+          "bbox": [
+            217,
+            269,
+            340,
+            281
+          ],
+          "text": "STATEMENT SUMMARY",
+          "reading_order": 21
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_022.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_001_figure_022.png",
+          "bbox": [
+            195,
+            303,
+            213,
+            321
+          ],
+          "reading_order": 22
+        },
+        {
+          "label": "para",
+          "bbox": [
+            226,
+            299,
+            413,
+            332
+          ],
+          "text": "<table><tr><td>Previous Balance</td><td>Purchases / Charges</td></tr><tr><td>`42,136.00</td><td>`1,18,303.90</td></tr></table>",
+          "reading_order": 23
+        },
+        {
+          "label": "para",
+          "bbox": [
+            425,
+            299,
+            597,
+            332
+          ],
+          "text": "<table><tr><td>Cash Advances</td><td>Payments / Credits</td></tr><tr><td>`0.00</td><td>`69,872.00</td></tr></table>",
+          "reading_order": 24
+        },
+        {
+          "label": "para",
+          "bbox": [
+            217,
+            340,
+            315,
+            353
+          ],
+          "text": "CREDIT SUMMARY",
+          "reading_order": 25
+        },
+        {
+          "label": "para",
+          "bbox": [
+            218,
+            360,
+            602,
+            426
+          ],
+          "text": "<table><tr><td colspan=\"2\">Credit Limit (including cash)</td><td>Available Credit (including cash)</td><td>Cash Limit</td><td>Available Cash</td></tr><tr><td colspan=\"2\">1,20,000.00</td><td>`2,885.50</td><td>`18,000.00</td><td>`2,885.50</td></tr><tr><td>Date</td><td>SerNo.</td><td>Transaction Details</td><td></td><td>Infl.a amount (in$^{*}$)</td></tr></table>",
+          "reading_order": 26
+        },
+        {
+          "label": "para",
+          "bbox": [
+            219,
+            453,
+            307,
+            464
+          ],
+          "text": "4375XXXXXXXX4006",
+          "reading_order": 27
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            218,
+            485,
+            597,
+            640
+          ],
+          "text": "<table><tr><td>02/07/2020</td><td>4598236064</td><td>UPI Payment Received</td><td>0</td><td>1,000.00 CR</td></tr><tr><td>03/07/2020</td><td>4598236633</td><td>UPI Payment Received</td><td>0</td><td>1,000.00 CR</td></tr><tr><td>03/07/2020</td><td>4598237294</td><td>UPI Payment Received</td><td>0</td><td>1,000.00 CR</td></tr><tr><td>04/07/2020</td><td>4598237841</td><td>UPI Payment Received</td><td>0</td><td>1,000.00 CR</td></tr><tr><td>06/07/2020</td><td>4598238320</td><td>UPI Payment Received</td><td>0</td><td>1,000.00 CR</td></tr><tr><td>08/07/2020</td><td>4598239140</td><td>UPI Payment Received</td><td>0</td><td>5,200.00 CR</td></tr><tr><td>08/07/2020</td><td>4598239443</td><td>UPI Payment Received</td><td>0</td><td>9.00 CR</td></tr><tr><td>09/07/2020</td><td>4598239958</td><td>UPI Payment Received</td><td>0</td><td>7.00 CR</td></tr><tr><td>10/07/2020</td><td>4598240518</td><td>UPI Payment Received</td><td>0</td><td>13.00 CR</td></tr><tr><td>10/07/2020</td><td>4598241537</td><td>UPI Payment Received</td><td>0</td><td>8.00 CR</td></tr><tr><td>10/07/2020</td><td>4598242275</td><td>UPI Payment Received</td><td>0</td><td>5.00 CR</td></tr><tr><td>10/07/2020</td><td>4598243250</td><td>UPI Payment Received</td><td>0</td><td>5.00 CR</td></tr></table>",
+          "reading_order": 28
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            219,
+            687,
+            597,
+            712
+          ],
+          "text": "<table><tr><td>15/07/2020</td><td>4611958898</td><td>REL RETAIL LTD-DIGITAL HYDERABAD IN</td><td>-450</td><td>22,500.00 CR</td></tr><tr><td>18/07/2020</td><td>4611964239</td><td>INSTANT EMI OFFUS CONVERSION</td><td>0</td><td>0.00 CR</td></tr></table>",
+          "reading_order": 29
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            40,
+            873,
+            135,
+            884
+          ],
+          "text": "Invoke No: 1574151100269497",
+          "reading_order": 30
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            216,
+            873,
+            319,
+            884
+          ],
+          "text": "CIN No. L65190GJ1994PLCD21012",
+          "reading_order": 31
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            557,
+            873,
+            595,
+            883
+          ],
+          "text": "Page 1 of 4",
+          "reading_order": 32
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "elements": [
+        {
+          "label": "header",
+          "bbox": [
+            3,
+            4,
+            77,
+            18
+          ],
+          "text": "[PAGE_START_2]",
+          "reading_order": 0
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            46,
+            39,
+            595,
+            135
+          ],
+          "text": "<table><tr><td>22/06/2020</td><td>456660290</td><td>RELANCE DIGITAL HYDERABAD IN</td><td>530</td><td>26,499.00</td><td></td><td></td></tr><tr><td>29/06/2020</td><td>4586912601</td><td>UPI Payment Received</td><td>0</td><td>2,000.00 CR</td><td></td><td></td></tr><tr><td>28/06/2020</td><td>4588191045</td><td>AMAZON HTTP://WWW.AM IN</td><td>162</td><td>8,099.10</td><td></td><td></td></tr><tr><td>HPCL</td><td>Credit Card</td><td>13/07/2020</td><td>4607470614</td><td>REL RETAIL LTD-DIGITAL HYDERABAD IN</td><td>450</td><td>22,500.00</td></tr><tr><td></td><td>T&amp;amp;C only.</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>22/07/2020</td><td>4611964240</td><td>Interest Amount Amortization - &lt;1/3&gt;</td><td>0</td><td>243.56</td></tr></table>",
+          "reading_order": 1
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            42,
+            159,
+            202,
+            199
+          ],
+          "text": "<table><tr><td>Points Earned</td><td>Points Transferred to PAYBACK</td><td>PAYBACK Account Number</td></tr><tr><td>1762</td><td>1762</td><td>9401164815200001</td></tr></table>",
+          "reading_order": 2
+        },
+        {
+          "label": "sec_2",
+          "bbox": [
+            27,
+            206,
+            191,
+            226
+          ],
+          "text": "For detailed summary of Reward Points, please\nclick here",
+          "reading_order": 3
+        },
+        {
+          "label": "para",
+          "bbox": [
+            51,
+            229,
+            196,
+            275
+          ],
+          "text": "3C1CI Bank Credit Card GST Number: 27AAAC11195H12K\n\nHSN Code: 9971 Financial and Related Services\n\nStatement period : October 16, 2020 to November 15,\n\n2020 Place of supply: Maharashtra\n\nState Code: 27",
+          "reading_order": 4
+        },
+        {
+          "label": "para",
+          "bbox": [
+            275,
+            161,
+            537,
+            174
+          ],
+          "text": "For ICICI Bank Limited| Amarjit S. Walia | Head - Consumer & Commercial",
+          "reading_order": 5
+        },
+        {
+          "label": "para",
+          "bbox": [
+            216,
+            186,
+            556,
+            198
+          ],
+          "text": "For any query, you may write to us on customer.care@icicibank.com or call us at 1860 120 7777.",
+          "reading_order": 6
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            231,
+            202,
+            344,
+            215
+          ],
+          "text": "IMPORTANT MESSAGES",
+          "reading_order": 7
+        },
+        {
+          "label": "list",
+          "bbox": [
+            219,
+            220,
+            594,
+            312
+          ],
+          "text": "• Safe Banking Tips -\n• Our registered office address: ICICI Bank Tower, Near Chakli Circle, Old Padra Road, Vadodera, 390 007.\n• Making only minimum payment every month can lead to repayment stretching over years with consequent interest\npayment on outstanding balance.\n• Please pay your Credit Card outstanding before the payment due date to avoid penal fees and interest charges.\n• For any clarification or more information, you may contact us through the 'Get in Touch' option at www.icicibenk.com\n• Mark-up fee and corresponding GST levied is included in the transaction amount displayed.\n• For Visa/Mastercard Credit Cards: Fuel surcharge and corresponding Goods and Services Tax (GST) levied is included in\nthe transaction amount displayed.\n• Payment through UPI is subject to the limits set by respective payment service providers.",
+          "reading_order": 8
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            40,
+            873,
+            135,
+            884
+          ],
+          "text": "Invoke No: 1574151100269497",
+          "reading_order": 9
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            215,
+            872,
+            319,
+            884
+          ],
+          "text": "CIN No. L65190GJ1994PLCD21012",
+          "reading_order": 10
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            557,
+            873,
+            595,
+            883
+          ],
+          "text": "Page 2 of 4",
+          "reading_order": 11
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            610,
+            796,
+            622,
+            810
+          ],
+          "text": "1/1",
+          "reading_order": 12
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "elements": [
+        {
+          "label": "header",
+          "bbox": [
+            3,
+            4,
+            77,
+            18
+          ],
+          "text": "[PAGE_START_3]",
+          "reading_order": 0
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            34,
+            62,
+            600,
+            436
+          ],
+          "text": "<table><tr><td>Date</td><td>Ser No.</td><td>Transaction Details</td><td>Reward Points</td><td>Int.f. amount</td><td>Amount (in)</td></tr><tr><td>06/07/2020</td><td>4611964241</td><td>SGST-CI@9%</td><td>0</td><td></td><td>21.92</td></tr><tr><td>06/07/2020</td><td>4611964244</td><td>CGST-CI@9%</td><td>0</td><td></td><td>21.92</td></tr><tr><td>06/07/2020</td><td>4611964250</td><td>Principal Amount Amortization - &lt;1/3&gt;</td><td>0</td><td></td><td>7,419.40</td></tr><tr><td>10/07/2020</td><td>4622891364</td><td>Fipkart Internet Priv BANGALORE IN</td><td>140</td><td></td><td>6,999.00</td></tr><tr><td>13/17/2020</td><td>4630382456</td><td>RELANCE DIGITAL HYDERABAD IN</td><td>930</td><td></td><td>46,500.00</td></tr><tr><td colspan=\"6\">437550000000004105</td></tr><tr><td>28/06/2020</td><td>4586187640</td><td>UPI Payment Received</td><td>0</td><td></td><td>5,000.00 OR</td></tr><tr><td>28/06/2020</td><td>4586187713</td><td>UPI Payment Received</td><td>0</td><td></td><td>13.00 OR</td></tr><tr><td>28/06/2020</td><td>4586616481</td><td>UPI Payment Received</td><td>0</td><td></td><td>5,001.00 OR</td></tr><tr><td>28/06/2020</td><td>4586616553</td><td>UPI Payment Received</td><td>0</td><td></td><td>14.00 OR</td></tr><tr><td>02/07/2020</td><td>4597454579</td><td>UPI Payment Received</td><td>0</td><td></td><td>1,000.00 OR</td></tr><tr><td>06/07/2020</td><td>4597455177</td><td>UPI Payment Received</td><td>0</td><td></td><td>1,000.00 OR</td></tr><tr><td>08/07/2020</td><td>4597455732</td><td>UPI Payment Received</td><td>0</td><td></td><td>1,000.00 OR</td></tr><tr><td>10/07/2020</td><td>4597456234</td><td>UPI Payment Received</td><td>0</td><td></td><td>1,000.00 OR</td></tr><tr><td>10/07/2020</td><td>459745656</td><td>UPI Payment Received</td><td>0</td><td></td><td>1,000.00 OR</td></tr><tr><td>10/07/2020</td><td>4597457112</td><td>UPI Payment Received</td><td>0</td><td></td><td>7.00 OR</td></tr><tr><td>10/07/2020</td><td>4597458004</td><td>UPI Payment Received</td><td>0</td><td></td><td>5,000.00 OR</td></tr><tr><td>13/07/2020</td><td>4597459574</td><td>UPI Payment Received</td><td>0</td><td></td><td>20.00 OR</td></tr><tr><td>14/07/2020</td><td>4597476373</td><td>UPI Payment Received</td><td>0</td><td></td><td>12.00 OR</td></tr><tr><td>14/07/2020</td><td>4597482360</td><td>UPI Payment Received</td><td>0</td><td></td><td>6.00 OR</td></tr><tr><td>16/07/2020</td><td>4597489209</td><td>UPI Payment Received</td><td>0</td><td></td><td>9.00 OR</td></tr><tr><td>16/07/2020</td><td>4597490199</td><td>UPI Payment Received</td><td>0</td><td></td><td>6.00 OR</td></tr><tr><td>16/07/2020</td><td>4597490909</td><td>UPI Payment Received</td><td>0</td><td></td><td>5,000.00 OR</td></tr><tr><td>16/07/2020</td><td>4597492046</td><td>UPI Payment Received</td><td>0</td><td></td><td>5,000.00 OR</td></tr><tr><td>16/07/2020</td><td>4597497936</td><td>UPI Payment Received</td><td>0</td><td></td><td>11.00 OR</td></tr><tr><td>18/07/2020</td><td>4597505459</td><td>UPI Payment Received</td><td>0</td><td></td><td>13.00 OR</td></tr><tr><td>18/07/2020</td><td>4598170209</td><td>UPI Payment Received</td><td>0</td><td></td><td>5,000.00 OR</td></tr><tr><td>18/07/2020</td><td>4600771444</td><td>UPI Payment Received</td><td>0</td><td></td><td>13.00 OR</td></tr></table>",
+          "reading_order": 1
+        },
+        {
+          "label": "anno",
+          "bbox": [
+            33,
+            436,
+            101,
+            445
+          ],
+          "text": "\" International Spends",
+          "reading_order": 2
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            33,
+            469,
+            276,
+            484
+          ],
+          "text": "EMI / PERSONAL LOAN ON CREDIT CARDS",
+          "reading_order": 3
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            34,
+            487,
+            600,
+            531
+          ],
+          "text": "<table><tr><td>Transaction/LoanType</td><td>Creation Date</td><td>Finish Date</td><td>No. of Intailments</td><td>EMI/Loan Amount</td><td>Pending Installments</td><td>Outstanding Amount*</td><td>Monthly Installment Amount</td></tr><tr><td>Merchant EMI conversions</td><td>06/06/2024</td><td>06/08/2024</td><td>3</td><td>22,500.00</td><td>1</td><td>7,662.96</td><td>7,662.96</td></tr></table>",
+          "reading_order": 4
+        },
+        {
+          "label": "anno",
+          "bbox": [
+            33,
+            537,
+            588,
+            558
+          ],
+          "text": "*For EMI Purchases and Loans within Credit Card limit, the credit limit of the credit card will be blocked by the amount which is equal to outstanding amount + Applicable Taxes and fees.\n*For loan on Credit Card-over the limit (PLCC OTL), the credit limit of the credit card will be blocked by the amount which is equal to billed EMI/EMIs + Applicable Taxes and fees.",
+          "reading_order": 5
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            610,
+            796,
+            622,
+            810
+          ],
+          "text": "1/1",
+          "reading_order": 6
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            557,
+            873,
+            594,
+            883
+          ],
+          "text": "Page 3 of 4",
+          "reading_order": 7
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "elements": [
+        {
+          "label": "header",
+          "bbox": [
+            3,
+            4,
+            77,
+            18
+          ],
+          "text": "[PAGE_START_4]",
+          "reading_order": 0
+        },
+        {
+          "label": "header",
+          "bbox": [
+            40,
+            56,
+            362,
+            74
+          ],
+          "text": "MOST IMPORTANT TERMS AND CONDITIONS (MITC)",
+          "reading_order": 1
+        },
+        {
+          "label": "para",
+          "bbox": [
+            38,
+            89,
+            508,
+            103
+          ],
+          "text": "To get the complete version of Credit Cards – Most Important Terms and Conditions (MITC), please visit:",
+          "reading_order": 2
+        },
+        {
+          "label": "para",
+          "bbox": [
+            37,
+            108,
+            599,
+            134
+          ],
+          "text": "ICICI Bank Website>Products>Credit Cards>Terms and Conditions and FAQs>Most Important Terms and\nConditions",
+          "reading_order": 3
+        },
+        {
+          "label": "para",
+          "bbox": [
+            37,
+            139,
+            510,
+            153
+          ],
+          "text": "Or visit the link: https://www.icicibank.com/managed-assets/docs/personal/cards/MITC_cc.pdf",
+          "reading_order": 4
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            154,
+            168,
+            481,
+            193
+          ],
+          "text": "GREAT OFFERS ON YOUR CARD",
+          "reading_order": 5
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_004_figure_006.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_004_figure_006.png",
+          "bbox": [
+            35,
+            207,
+            600,
+            397
+          ],
+          "reading_order": 6
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_004_figure_007.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_004_figure_007.png",
+          "bbox": [
+            35,
+            404,
+            600,
+            591
+          ],
+          "reading_order": 7
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_004_figure_008.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_004_figure_008.png",
+          "bbox": [
+            35,
+            599,
+            593,
+            785
+          ],
+          "reading_order": 8
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            557,
+            873,
+            594,
+            883
+          ],
+          "text": "Page 4 of 4",
+          "reading_order": 9
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            610,
+            796,
+            622,
+            810
+          ],
+          "text": "1/1",
+          "reading_order": 10
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "elements": [
+        {
+          "label": "header",
+          "bbox": [
+            3,
+            4,
+            77,
+            18
+          ],
+          "text": "[PAGE_START_5]",
+          "reading_order": 0
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_001.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_001.png",
+          "bbox": [
+            33,
+            65,
+            300,
+            252
+          ],
+          "reading_order": 1
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            309,
+            90,
+            506,
+            127
+          ],
+          "text": "Up to ₹5000 off* on flight &\nholiday bookings",
+          "reading_order": 2
+        },
+        {
+          "label": "para",
+          "bbox": [
+            311,
+            134,
+            494,
+            149
+          ],
+          "text": "Offer Valid till December 31, 2020",
+          "reading_order": 3
+        },
+        {
+          "label": "para",
+          "bbox": [
+            311,
+            157,
+            508,
+            186
+          ],
+          "text": "For more details, visit\nwww.icicibank.com/creditcardoffers",
+          "reading_order": 4
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_005.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_005.png",
+          "bbox": [
+            310,
+            194,
+            387,
+            231
+          ],
+          "reading_order": 5
+        },
+        {
+          "label": "para",
+          "bbox": [
+            313,
+            234,
+            336,
+            242
+          ],
+          "text": "meth",
+          "reading_order": 6
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_007.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_007.png",
+          "bbox": [
+            400,
+            194,
+            469,
+            232
+          ],
+          "reading_order": 7
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            360,
+            283,
+            540,
+            317
+          ],
+          "text": "Flat 15% off on Annual and\nHalf Yearly Membership",
+          "reading_order": 8
+        },
+        {
+          "label": "para",
+          "bbox": [
+            361,
+            328,
+            488,
+            342
+          ],
+          "text": "Offer till January 31, 2021",
+          "reading_order": 9
+        },
+        {
+          "label": "para",
+          "bbox": [
+            361,
+            350,
+            539,
+            376
+          ],
+          "text": "For more details, visit\nwww.icicibank.com/creditcardoffers",
+          "reading_order": 10
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_011.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_011.png",
+          "bbox": [
+            33,
+            376,
+            365,
+            449
+          ],
+          "reading_order": 11
+        },
+        {
+          "label": "para",
+          "bbox": [
+            383,
+            399,
+            462,
+            424
+          ],
+          "text": "A",
+          "reading_order": 12
+        },
+        {
+          "label": "para",
+          "bbox": [
+            378,
+            428,
+            406,
+            438
+          ],
+          "text": "TBC400",
+          "reading_order": 13
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_014.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_014.png",
+          "bbox": [
+            33,
+            457,
+            283,
+            644
+          ],
+          "reading_order": 14
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_015.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_015.png",
+          "bbox": [
+            296,
+            537,
+            377,
+            583
+          ],
+          "reading_order": 15
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_016.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_016.png",
+          "bbox": [
+            383,
+            548,
+            426,
+            571
+          ],
+          "reading_order": 16
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_017.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_017.png",
+          "bbox": [
+            33,
+            653,
+            297,
+            840
+          ],
+          "reading_order": 17
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            319,
+            673,
+            484,
+            710
+          ],
+          "text": "Get up to 15% off at\n\nApollo Pharmacy store",
+          "reading_order": 18
+        },
+        {
+          "label": "para",
+          "bbox": [
+            321,
+            717,
+            469,
+            732
+          ],
+          "text": "Offer Valid till Mar 31, 2021",
+          "reading_order": 19
+        },
+        {
+          "label": "para",
+          "bbox": [
+            321,
+            739,
+            518,
+            768
+          ],
+          "text": "For more details, visit\nwww.icicibank.com/creditcardoffers",
+          "reading_order": 20
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_021.png)",
+          "figure_path": "figures/753706830-ICICI-CREDIT-CARD-STATEMENT_stamped_page_005_figure_021.png",
+          "bbox": [
+            318,
+            773,
+            377,
+            823
+          ],
+          "reading_order": 21
+        },
+        {
+          "label": "para",
+          "bbox": [
+            389,
+            806,
+            414,
+            815
+          ],
+          "text": "TM□□",
+          "reading_order": 22
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            76,
+            841,
+            564,
+            852
+          ],
+          "text": "This is an authenticated intimation/statement. Customers are requested to immediately notify the Bank of any discrepancy in the statement.",
+          "reading_order": 23
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            557,
+            873,
+            594,
+            883
+          ],
+          "text": "Page 5 of 4",
+          "reading_order": 24
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            610,
+            796,
+            622,
+            810
+          ],
+          "text": "1/1",
+          "reading_order": 25
+        }
+      ]
+    }
+  ]
+}

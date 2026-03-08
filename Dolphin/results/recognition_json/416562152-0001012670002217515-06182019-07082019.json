@@ -1,0 +1,277 @@
+{
+  "source_file": "E:\\jupiter-assignment\\docs\\416562152-0001012670002217515-06182019-07082019.pdf",
+  "total_pages": 1,
+  "pages": [
+    {
+      "page_number": 1,
+      "elements": [
+        {
+          "label": "fig",
+          "text": "![Figure](figures/416562152-0001012670002217515-06182019-07082019_page_001_figure_000.png)",
+          "figure_path": "figures/416562152-0001012670002217515-06182019-07082019_page_001_figure_000.png",
+          "bbox": [
+            13,
+            9,
+            118,
+            36
+          ],
+          "reading_order": 0
+        },
+        {
+          "label": "header",
+          "bbox": [
+            130,
+            13,
+            258,
+            26
+          ],
+          "text": "DUPLICATE STATEMENT",
+          "reading_order": 1
+        },
+        {
+          "label": "header",
+          "bbox": [
+            281,
+            12,
+            494,
+            27
+          ],
+          "text": "VISA Business Regalia First Credit",
+          "reading_order": 2
+        },
+        {
+          "label": "header",
+          "bbox": [
+            532,
+            13,
+            594,
+            27
+          ],
+          "text": "Statement",
+          "reading_order": 3
+        },
+        {
+          "label": "header",
+          "bbox": [
+            13,
+            27,
+            119,
+            36
+          ],
+          "text": "We understand your world",
+          "reading_order": 4
+        },
+        {
+          "label": "header",
+          "bbox": [
+            229,
+            31,
+            493,
+            44
+          ],
+          "text": "HDFC Bank Credit Cards GSTIN : 33AAACH2702H2Z6",
+          "reading_order": 5
+        },
+        {
+          "label": "header",
+          "bbox": [
+            532,
+            30,
+            621,
+            43
+          ],
+          "text": "HSN Code - 9971",
+          "reading_order": 6
+        },
+        {
+          "label": "para",
+          "bbox": [
+            16,
+            55,
+            259,
+            104
+          ],
+          "text": "Name\n: SAHIL DUGGAL\n\nEmail\n: SAHILDUGGAL22@YAHOO.COM\n\nAddress : S/O VIJAY DUGGAL NO 59 GALI PANDITAN WALI\n\nNEAR POST OFFICE AMRITSAR ATTARI-143108 PUN",
+          "reading_order": 7
+        },
+        {
+          "label": "para",
+          "bbox": [
+            19,
+            116,
+            257,
+            158
+          ],
+          "text": "GST No :\nIn case you wish to update the personal details,please write a letter\nto The Manager, HDFC Bank Card Division, # 8, L B Road, \nThiruvanmiyur, Chennai - 600041",
+          "reading_order": 8
+        },
+        {
+          "label": "para",
+          "bbox": [
+            15,
+            174,
+            256,
+            220
+          ],
+          "text": "Note : The \"Available Credit Limit\" shown in this statement\ntakes into account charges incurred but not due. Please\nensure that at least the \"Minimum Amount Due\" reaches us\nby the \"Due Date\".",
+          "reading_order": 9
+        },
+        {
+          "label": "para",
+          "bbox": [
+            15,
+            229,
+            255,
+            274
+          ],
+          "text": "If the \"Minimum Amount Due\" or \"Part Amount\" less than the\n\"Total Amount Due\" is paid, Interest charges are applicable\n(including fresh purchases, if any) on an average daily\nreducing balance method.",
+          "reading_order": 10
+        },
+        {
+          "label": "para",
+          "bbox": [
+            15,
+            284,
+            246,
+            318
+          ],
+          "text": "To Hotlist your Credit Card, login into Netbanking or call\nour phone banking numbers at \"Locate Us * tab in HDFC\nBank website",
+          "reading_order": 11
+        },
+        {
+          "label": "para",
+          "bbox": [
+            15,
+            328,
+            249,
+            396
+          ],
+          "text": "Credit Information Companies (CICs) are approved by the\nReserve Bank of India to facilitate an effective and informed\ncredit risk assessment, Bank reserves the right to include\nyour name in the list of defaulters and share the conduct of\nyour credit card account with these CICs and statutory\nbodies in accordance with the CIC(Regulation)Act 2005.",
+          "reading_order": 12
+        },
+        {
+          "label": "para",
+          "bbox": [
+            15,
+            405,
+            254,
+            439
+          ],
+          "text": "To know the Voluntary Codes as prescribed by the \" The\nBanking Codes and Standards Board of India (BCSBI)\", Visit\n\"Our Corporate Commitment\" link at HDFC Bank website.",
+          "reading_order": 13
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            10,
+            455,
+            649,
+            736
+          ],
+          "text": "<table><tr><td colspan=\"3\">Domestic Transactions</td></tr><tr><td>Date</td><td>Transaction Description</td><td>Amount (in Rs.)</td></tr><tr><td>18/05/2019</td><td>SAHL DUGGAL</td><td></td></tr><tr><td>18/05/2019</td><td>IGST-VPS1913964684071-RATE 18.0 -03 (Ref# 09999999990518002916080)</td><td>90.36</td></tr><tr><td>18/05/2019</td><td>IGST-VPS1913964684071-RATE 18.0 -03 (Ref# 09999999990518002916064)</td><td>6.55</td></tr><tr><td>06/06/2019</td><td>NETBANKING TRANSFER (Ref# 000000000000606010543928)</td><td>3,295.00 Cr</td></tr><tr><td>18/06/2019</td><td>MER EMI /INT NBR:09,0000000000401 (Ref# 0999999990618003016599)</td><td>18.30</td></tr><tr><td>18/06/2019</td><td>INSTALOAN,PRIN NB:04,0000000000446 (Ref# 099999999980618003016607)</td><td>1,314.70</td></tr><tr><td>18/06/2019</td><td>INSTALOAN,INT NBR:04,0000000000446 (Ref# 099999999980618003016615)</td><td>482.57</td></tr><tr><td>18/06/2019</td><td>M-FLIPKART PAYMENTS ,P:09,000401 (Ref# 09999999980618003016581)</td><td>1,569.28</td></tr></table>",
+          "reading_order": 14
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            9,
+            754,
+            649,
+            822
+          ],
+          "text": "<table><tr><td colspan=\"7\">Reward Points Summary</td></tr><tr><td>Opening Balance</td><td>Earned</td><td>Disbursed</td><td>Adjusted/Lapsed</td><td>Closing Balance</td><td>Points expiring in 30 days or next month</td><td>Points expiring in 60 days</td></tr><tr><td>1,690</td><td>0</td><td>0</td><td>0</td><td>1,690</td><td>0</td><td>0</td></tr></table>",
+          "reading_order": 15
+        },
+        {
+          "label": "anno",
+          "bbox": [
+            10,
+            825,
+            646,
+            846
+          ],
+          "text": "* Note: All contents of the Statement will be deemed to be correct and accepted by you, unless you inform us of any discrepancies within 30 days from the date of this statement\n* The available credit limit showed herein takes into account charges incurred but not billed",
+          "reading_order": 16
+        },
+        {
+          "label": "para",
+          "bbox": [
+            367,
+            57,
+            555,
+            70
+          ],
+          "text": "Statement for HDFC Bank Credit Card",
+          "reading_order": 17
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            269,
+            70,
+            646,
+            195
+          ],
+          "text": "<table><tr><td>Statement Date:18/06/2019</td><td colspan=\"2\">Card No: 4572 62XX XXXX 7512</td></tr><tr><td>Payment Due Date</td><td>Total Dues</td><td>Minimum Amount Due</td></tr><tr><td>08/07/2019</td><td>3,482.00</td><td>3,482.00</td></tr><tr><td>Credit Limit</td><td>Available Credit Limit</td><td>Available Cash Limit</td></tr><tr><td>48,000</td><td>13,662</td><td>0.00</td></tr></table>",
+          "reading_order": 18
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            269,
+            201,
+            648,
+            273
+          ],
+          "text": "<table><tr><td colspan=\"6\">Account Summary</td></tr><tr><td>Opening Balance</td><td>—</td><td>Payment/Credits</td><td>+</td><td>Purchase/Debits</td><td>+</td><td>Finance Charges</td></tr><tr><td>3,294.84</td><td></td><td>3,295.00</td><td></td><td>3,481.76</td><td></td><td>0.00</td></tr></table>",
+          "reading_order": 19
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            269,
+            278,
+            646,
+            351
+          ],
+          "text": "<table><tr><td colspan=\"6\">Past Dues (If any)</td></tr><tr><td>Overlimit</td><td>3 Months+</td><td>2 Months</td><td>1 Month</td><td>Current Dues</td><td>Minimum Amount Due</td></tr><tr><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>3,481.60</td><td>3,482.00</td></tr></table>",
+          "reading_order": 20
+        },
+        {
+          "label": "para",
+          "bbox": [
+            276,
+            359,
+            396,
+            371
+          ],
+          "text": "IMPORTANT INFORMATION",
+          "reading_order": 21
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/416562152-0001012670002217515-06182019-07082019_page_001_figure_022.png)",
+          "figure_path": "figures/416562152-0001012670002217515-06182019-07082019_page_001_figure_022.png",
+          "bbox": [
+            527,
+            842,
+            598,
+            858
+          ],
+          "reading_order": 22
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            522,
+            861,
+            598,
+            875
+          ],
+          "text": "For HDFC Bank",
+          "reading_order": 23
+        }
+      ]
+    }
+  ]
+}

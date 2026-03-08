@@ -1,0 +1,194 @@
+{
+  "source_file": "E:\\jupiter-assignment\\docs\\379281148-Sample-Credit-Card-Bill.pdf",
+  "total_pages": 2,
+  "pages": [
+    {
+      "page_number": 1,
+      "elements": [
+        {
+          "label": "fig",
+          "text": "![Figure](figures/379281148-Sample-Credit-Card-Bill_page_001_figure_000.png)",
+          "figure_path": "figures/379281148-Sample-Credit-Card-Bill_page_001_figure_000.png",
+          "bbox": [
+            35,
+            35,
+            81,
+            89
+          ],
+          "reading_order": 0
+        },
+        {
+          "label": "header",
+          "bbox": [
+            81,
+            66,
+            299,
+            117
+          ],
+          "text": "ETC BANK",
+          "reading_order": 1
+        },
+        {
+          "label": "header",
+          "bbox": [
+            497,
+            38,
+            653,
+            57
+          ],
+          "text": "CREDIT CARD ACCOUNT",
+          "reading_order": 2
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            405,
+            86,
+            653,
+            126
+          ],
+          "text": "<table><tr><td>Account Number</td><td>1000 0001 1000 0001</td></tr><tr><td>Regular Credit Limit</td><td>P50,000</td></tr></table>",
+          "reading_order": 3
+        },
+        {
+          "label": "para",
+          "bbox": [
+            39,
+            157,
+            208,
+            174
+          ],
+          "text": "BERGL M. SBUCOL",
+          "reading_order": 4
+        },
+        {
+          "label": "fig",
+          "text": "![Figure](figures/379281148-Sample-Credit-Card-Bill_page_001_figure_005.png)",
+          "figure_path": "figures/379281148-Sample-Credit-Card-Bill_page_001_figure_005.png",
+          "bbox": [
+            39,
+            176,
+            59,
+            192
+          ],
+          "reading_order": 5
+        },
+        {
+          "label": "para",
+          "bbox": [
+            60,
+            177,
+            204,
+            191
+          ],
+          "text": "4 LIMOUSINE ST RANCHO",
+          "reading_order": 6
+        },
+        {
+          "label": "para",
+          "bbox": [
+            40,
+            191,
+            172,
+            234
+          ],
+          "text": "2018\n\n\nESTATE IV EAST PARK\n\n\n1800 MARIKINA CITY",
+          "reading_order": 7
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            392,
+            157,
+            650,
+            194
+          ],
+          "text": "<table><tr><td>Statement Date</td><td>Payment Due Date</td></tr><tr><td>23 January</td><td>2018</td></tr></table>",
+          "reading_order": 8
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            392,
+            204,
+            650,
+            242
+          ],
+          "text": "<table><tr><td>Total Amount Due PHP 50,000</td><td>Minimum Amount Due PHP 2,500</td></tr></table>",
+          "reading_order": 9
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            39,
+            291,
+            653,
+            324
+          ],
+          "text": "<table><tr><td>Previous Balance</td><td>Plus Purchases/Debits</td><td>Less Payments/Credits</td><td>Total Amount Due</td></tr><tr><td>25,000.00</td><td>45,000.00</td><td>20,000.00</td><td>50,000.00</td></tr></table>",
+          "reading_order": 10
+        },
+        {
+          "label": "sec_1",
+          "bbox": [
+            39,
+            369,
+            201,
+            388
+          ],
+          "text": "TRANSACTION DETAILS",
+          "reading_order": 11
+        },
+        {
+          "label": "tab",
+          "bbox": [
+            42,
+            401,
+            665,
+            651
+          ],
+          "text": "<table><tr><td>Post Date</td><td>Tran Date</td><td>Description</td><td>Amount 25,000.00</td></tr><tr><td colspan=\"4\">Previous Balance PESO ACCOUNT DETAILS</td></tr><tr><td>01/23/18</td><td>01/23/18</td><td>BERGL M. SBUCOL - 1000 0001 1000 0001 FINANCE CHARGES</td><td>2,500.00</td></tr><tr><td>01/22/18</td><td>12/21/17</td><td>BERGL M. SBUCOL - 4645 5189 2167 2001</td><td>5,800.00</td></tr><tr><td>01/22/18</td><td>12/21/17</td><td>INSTL 1/12 iPHONE X POWER MAC CENTER SM NORTH QUEZON CITY</td><td>12,000.00</td></tr><tr><td>01/22/18</td><td>12/21/17</td><td>SM NORTH DEPT STORE QUEZON CITY</td><td>3,200.00</td></tr><tr><td>01/22/18</td><td>12/21/17</td><td>INSTL 1/3 SM NORTH AUTOMATIC CENTER QUEZON CITY</td><td>3,200.00</td></tr><tr><td>01/22/18</td><td>12/21/17</td><td>SM NORTH TRAVEL CLUB QUEZON CITY</td><td>6,500.00</td></tr><tr><td>01/22/18</td><td>12/21/17</td><td>SM NORTH HYPERMARKET QUEZON CITY</td><td>5,000.00</td></tr><tr><td>01/17/18</td><td>01/18/18</td><td>NIHONBASHITEI MAKATI CITY</td><td>3,000.00</td></tr><tr><td>01/14/18</td><td>01/15/18</td><td>SM MARIKINA HYPERMARKET MARIKINA CITY</td><td>2,000.00</td></tr><tr><td>01/10/18</td><td>11/11/17</td><td>INSTL 2/6 ELECTROWORLD TRINOMA QUEZON CITY</td><td>2,500.00</td></tr><tr><td>01/07/18</td><td>06/08/17</td><td>INSTL 7/12 ELECTROWORLD TRINOMA QUEZON CITY</td><td>2,500.00</td></tr><tr><td>01/03/18</td><td>01/03/18</td><td>CASH PAYMENT - THANK YOU ETC BANK</td><td>20,000.00</td></tr><tr><td colspan=\"4\">TOTAL AMOUNT DUE</td></tr></table>",
+          "reading_order": 12
+        },
+        {
+          "label": "para",
+          "bbox": [
+            263,
+            692,
+            429,
+            710
+          ],
+          "text": "****END OF STATEMENT***",
+          "reading_order": 13
+        },
+        {
+          "label": "foot",
+          "bbox": [
+            38,
+            829,
+            268,
+            854
+          ],
+          "text": "ETC BANK CARD CORPORATION\nETC BLDG 4620 Ayala Avenue, Makati City, Philippines",
+          "reading_order": 14
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "elements": [
+        {
+          "label": "header",
+          "bbox": [
+            39,
+            39,
+            202,
+            64
+          ],
+          "text": "Customer Service 8-888-888\n\n👖 customerservice@etcbankcard.com",
+          "reading_order": 0
+        }
+      ]
+    }
+  ]
+}
