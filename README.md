@@ -64,6 +64,8 @@ Narrator         — formats everything into a clear natural language answer
 > The LLM never does math directly — it only extracts, plans, generates code, and narrates. All computation goes through the sandboxed executor.
 
 ---
+## Architecture
+<img width="5460" height="5841" alt="image" src="https://github.com/user-attachments/assets/3d1c0f3f-662c-455b-bf47-4f3fe4c3b037" />
 
 ## Project Structure
 
