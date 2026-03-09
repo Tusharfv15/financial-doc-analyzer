@@ -95,3 +95,15 @@ Docling OCR runs on a Modal serverless GPU endpoint. The `modal-financial-assist
 
 ### Frontend — Streamlit
 The user interface is a Streamlit app. Users upload a PDF, type a query, choose a mode (Direct or RAG), and see the final answer along with intermediate outputs (extracted transactions, generated code, narrator response).
+
+### UI
+<img width="1335" height="629" alt="image" src="https://github.com/user-attachments/assets/e91aa802-ba42-4250-b9f1-637f6f7d6ed6" />
+
+## Summary
+<img width="1203" height="832" alt="image" src="https://github.com/user-attachments/assets/5514c788-7a29-4722-8ace-360a50381664" />
+
+## Extracted Transactions from the document
+<img width="1284" height="864" alt="image" src="https://github.com/user-attachments/assets/0da5c5e6-28ae-4cf8-972e-f8178da4780a" />
+
+
+
