@@ -8,10 +8,10 @@ A pipeline that answers natural language queries over financial PDFs.
 
 ```bash
 # Direct mode (default)
-python financial_assistant.py docs/statement.pdf "Total amount of transactions done Via UPI"
+python modal-financial_assistant-rag-pipeline.py docs/statement.pdf "Total amount of transactions done Via UPI"
 
 # RAG mode
-python financial_assistant.py docs/statement.pdf "Detailed Report of scheme performance discussed in that of Annexure 1" --rag
+python modal-financial_assistant-rag-pipeline.py docs/statement.pdf "Detailed Report of scheme performance discussed in that of Annexure 1" --rag
 ```
 
 ---
