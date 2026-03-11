@@ -93,6 +93,8 @@ merged_markdown/         # retrieved + merged chunks used for each query
 
 ### Backend — Modal
 Docling OCR runs on a Modal serverless GPU endpoint. The `modal-financial-assistant-rag-pipeline.py ` script is deployed as a Modal function, so OCR happens on cloud GPUs without any local setup. The main pipeline calls this endpoint and receives the markdown output.
+<img width="1550" height="152" alt="image" src="https://github.com/user-attachments/assets/de84a2bb-e1d0-41e7-9cd0-eedea99983a2" />
+
 
 ### Frontend — Streamlit
 The user interface is a Streamlit app. Users upload a PDF, type a query, choose a mode (Direct or RAG), and see the final answer along with intermediate outputs (extracted transactions, generated code, narrator response).
