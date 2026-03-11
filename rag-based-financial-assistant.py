@@ -40,8 +40,8 @@ from router         import router_node
 from code_generator import code_generator_node
 from code_executor  import executor_node, MAX_RETRIES
 from retriever      import retrieve_chunks
-from embed          import embed_document
-from chunker        import chunk_file
+from embed_v2        import embed_document
+from chunker_v2       import chunk_file
 
 client  = OpenAI()
 MODEL   = "gpt-5-mini-2025-08-07"
