@@ -65,7 +65,8 @@ Narrator         — formats everything into a clear natural language answer
 
 ---
 ## Architecture
-<img width="5460" height="6127" alt="image" src="https://github.com/user-attachments/assets/837a70bf-f445-482f-a333-905aecb2e9be" />
+<img width="5460" height="6127" alt="Untitled-2025-09-10-2053" src="https://github.com/user-attachments/assets/990f661b-57cb-4ec9-aeec-4d23120e4ab5" />
+
 
 
 ## Project Structure
