@@ -65,7 +65,9 @@ Narrator         — formats everything into a clear natural language answer
 
 ---
 ## Architecture
-<img width="5460" height="5841" alt="image" src="https://github.com/user-attachments/assets/3d1c0f3f-662c-455b-bf47-4f3fe4c3b037" />
+<img width="5460" height="6127" alt="Untitled-2025-09-10-2053" src="https://github.com/user-attachments/assets/990f661b-57cb-4ec9-aeec-4d23120e4ab5" />
+
+
 
 ## Project Structure
 
@@ -92,6 +94,8 @@ merged_markdown/         # retrieved + merged chunks used for each query
 
 ### Backend — Modal
 Docling OCR runs on a Modal serverless GPU endpoint. The `modal-financial-assistant-rag-pipeline.py ` script is deployed as a Modal function, so OCR happens on cloud GPUs without any local setup. The main pipeline calls this endpoint and receives the markdown output.
+<img width="1550" height="152" alt="image" src="https://github.com/user-attachments/assets/de84a2bb-e1d0-41e7-9cd0-eedea99983a2" />
+
 
 ### Frontend — Streamlit
 The user interface is a Streamlit app. Users upload a PDF, type a query, choose a mode (Direct or RAG), and see the final answer along with intermediate outputs (extracted transactions, generated code, narrator response).
