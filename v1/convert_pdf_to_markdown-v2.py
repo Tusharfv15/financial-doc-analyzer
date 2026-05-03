@@ -3,6 +3,7 @@ from pathlib import Path
 from docling.document_converter import DocumentConverter
 import os
 os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
+os.environ['DOCLING_ARTIFACTS_PATH'] = 'E:\\jupiter-assignment\\v1\\cache'
 
 def convert_pdf_to_md(pdf_path: str):
 
